@@ -8,7 +8,7 @@ from DataManager import DataManager
 
 class NeuralNetworksManager:
 
-    training_epochs = 3
+    training_epochs = 50
 
     @staticmethod
     def train_all_networks(network_names):
