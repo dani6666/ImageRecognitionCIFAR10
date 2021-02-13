@@ -6,21 +6,23 @@ from NeuralNetwork import NeuralNetwork
 
 
 class NeuralNetworkManager:
+    networks_names = ["Simple CNN"]
 
     @staticmethod
-    def get_all_networks():
-        model = Sequential()
-        model.add(Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(32, 32, 3)))
-        model.add(MaxPooling2D((2, 2)))
-        model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-        model.add(MaxPooling2D((2, 2)))
-        model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-        model.add(MaxPooling2D((2, 2)))
-        model.add(Flatten())
-        model.add(Dense(128, activation='relu'))
-        model.add(Dense(10, activation='softmax'))
+    def get_network_model(name):
+        if name == NeuralNetworkManager.networks_names[0]:
+            model = Sequential()
+            model.add(Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(32, 32, 3)))
+            model.add(MaxPooling2D((2, 2)))
+            model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+            model.add(MaxPooling2D((2, 2)))
+            model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+            model.add(MaxPooling2D((2, 2)))
+            model.add(Flatten())
+            model.add(Dense(128, activation='relu'))
+            model.add(Dense(10, activation='softmax'))
 
-        opt = SGD(lr=0.001, momentum=0.9)
-        model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
+            opt = SGD(lr=0.001, momentum=0.9)
+            model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
 
-        yield NeuralNetwork("Simple CNN", model)
+            yield model
