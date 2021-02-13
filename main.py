@@ -1,0 +1,3 @@
+from NeuralNetworkComparer import NeuralNetworkComparer
+
+NeuralNetworkComparer.compare_neural_networks(None)
