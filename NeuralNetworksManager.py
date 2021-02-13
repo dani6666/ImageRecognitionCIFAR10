@@ -1,3 +1,5 @@
+import os
+
 from keras import models
 
 from AllNeuralNetworks import AllNeuralNetworks
@@ -7,6 +9,9 @@ class NeuralNetworksManager:
 
     @staticmethod
     def get_trained_network(network_name, train_x, train_y):
+
+        if not os.path.exists("NeuralNetworkModels"):
+            os.makedirs("NeuralNetworkModels")
 
         model_path = 'NeuralNetworkModels/' + network_name.replace(" ", "_")
 
