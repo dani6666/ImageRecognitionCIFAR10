@@ -9,16 +9,15 @@ class NeuralNetworksManager:
     def get_trained_network(network_name, train_x, train_y):
 
         model_path = 'NeuralNetworkModels/' + network_name.replace(" ", "_")
-        saved_model = models.load_model(model_path)
 
-        if saved_model is not None:
+        try:
+            saved_model = models.load_model(model_path)
             return saved_model
+        except OSError:
+            model = AllNeuralNetworks.get_network_model(network_name)
 
-        model = AllNeuralNetworks.get_network_model(network_name)
+            print("Training new model: " + network_name)
+            model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(train_x, train_y), verbose=0)
 
-        print("Training new model: " + network_name)
-        model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(train_x, train_y), verbose=0)
-
-        model.save(model_path)
-
-        return model
+            model.save(model_path)
+            return model
