@@ -18,9 +18,9 @@ class NeuralNetworkComparer:
         for neural_network in neural_networks:
             print("Testing " + neural_network.name)
 
-            history = neural_network.model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(train_x, train_y), verbose=1)
+            history = neural_network.model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(train_x, train_y), verbose=0)
 
-            _, accuracy = neural_network.model.evaluate(test_x, test_y, verbose=1)
+            _, accuracy = neural_network.model.evaluate(test_x, test_y, verbose=0)
 
-            print("Accuracy: " + accuracy)
+            print("Accuracy: " + str(accuracy))
 
