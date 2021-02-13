@@ -1,26 +1,22 @@
 from keras.datasets import cifar10
 from keras.utils import to_categorical
 
+from DataManager import DataManager
+from NeuralNetworksManager import NeuralNetworksManager
+
 
 class NeuralNetworkComparer:
 
     @staticmethod
-    def compare_neural_networks(neural_networks):
-        (train_x, train_y), (test_x, test_y) = cifar10.load_data()
+    def compare_neural_networks(networks_names):
+        train_x, train_y, test_x, test_y = DataManager.get_cifar10_data()
 
-        train_y = to_categorical(train_y)
-        test_y = to_categorical(test_y)
-        train_x = train_x.astype('float32')
-        test_x = test_x.astype('float32')
-        train_x = train_x / 255.0
-        test_x = test_x / 255.0
+        for network_name in networks_names:
+            print("Testing " + network_name)
 
-        for neural_network in neural_networks:
-            print("Testing " + neural_network.name)
+            model = NeuralNetworksManager.get_trained_network(network_name, train_x, train_y)
 
-            history = neural_network.model.fit(train_x, train_y, epochs=20, batch_size=64, validation_data=(train_x, train_y), verbose=0)
-
-            _, accuracy = neural_network.model.evaluate(test_x, test_y, verbose=0)
+            _, accuracy = model.evaluate(test_x, test_y, verbose=0)
 
             print("Accuracy: " + str(accuracy))
 
