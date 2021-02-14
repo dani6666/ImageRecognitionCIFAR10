@@ -25,7 +25,7 @@ class NeuralNetworksManager:
 
                 print("Training new model: " + network_name)
                 model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs,
-                          batch_size=64, validation_data=(train_x, train_y), verbose=0)
+                          batch_size=64, verbose=2)
 
                 model.save(model_path)
 
@@ -45,7 +45,7 @@ class NeuralNetworksManager:
 
             print("Training new model: " + network_name)
             model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs,
-                      batch_size=64, validation_data=(train_x, train_y), verbose=0)
+                      batch_size=64, verbose=0)
 
             model.save(model_path)
             return model
