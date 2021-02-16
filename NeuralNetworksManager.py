@@ -24,8 +24,10 @@ class NeuralNetworksManager:
                 model = AllNeuralNetworks.get_network_model(network_name)
 
                 print("Training new model: " + network_name)
-                model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs,
-                          batch_size=64, verbose=2)
+                augmentation_mode = AllNeuralNetworks.get_augmentation_mode(network_name)
+                train_x, train_y = NeuralNetworksManager.augment_data(augmentation_mode, train_x, train_y)
+
+                model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs, verbose=2)
 
                 model.save(model_path)
 
@@ -44,8 +46,17 @@ class NeuralNetworksManager:
             model = AllNeuralNetworks.get_network_model(network_name)
 
             print("Training new model: " + network_name)
-            model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs,
-                      batch_size=64, verbose=0)
+            augmentation_mode = AllNeuralNetworks.get_augmentation_mode(network_name)
+            train_x, train_y = NeuralNetworksManager.augment_data(augmentation_mode, train_x, train_y)
+
+            model.fit(train_x, train_y, epochs=NeuralNetworksManager.training_epochs, verbose=0)
 
             model.save(model_path)
             return model
+
+    @staticmethod
+    def augment_data(image_generator, train_x, train_y):
+        if image_generator is None:
+            return train_x, train_y
+
+        return image_generator.flow(train_x, train_y), None
