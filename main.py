@@ -1,19 +1,19 @@
-from NeuralNetworkComparer import NeuralNetworkComparer
-from AllNeuralNetworks import AllNeuralNetworks
-from NeuralNetworksManager import NeuralNetworksManager
+import comparer
+import trainer
+import neural_networks
 import argparse
 
 
 def main(args):
 
     if args.delete:
-        NeuralNetworksManager.delete_all_networks()
+        trainer.delete_all_networks()
     elif any(args.retrain_networks):
-        NeuralNetworksManager.retrain_networks(args.retrain_networks)
+        trainer.retrain_networks(args.retrain_networks)
     elif args.train:
-        NeuralNetworksManager.train_all_networks(AllNeuralNetworks.networks_names)
+        trainer.train_all_networks(neural_networks.networks_names)
     else:
-        NeuralNetworkComparer.compare_neural_networks(AllNeuralNetworks.networks_names)
+        comparer.compare_neural_networks(neural_networks.networks_names)
 
 
 if __name__ == "__main__":
