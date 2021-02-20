@@ -1,4 +1,3 @@
-from src.repository import neural_networks, networks_repository
 from src.core import trainer, comparer
 import argparse
 
@@ -6,13 +5,13 @@ import argparse
 def main(args):
 
     if args.delete:
-        networks_repository.delete_all_networks()
+        trainer.delete_all_trained_networks()
     elif any(args.retrain_networks):
         trainer.retrain_networks(args.retrain_networks)
     elif args.train:
-        trainer.train_all_networks(neural_networks.networks_names)
+        trainer.train_all_networks()
     else:
-        comparer.compare_neural_networks(neural_networks.networks_names)
+        comparer.compare_all_neural_networks()
 
 
 if __name__ == "__main__":

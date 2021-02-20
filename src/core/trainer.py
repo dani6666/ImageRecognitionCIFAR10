@@ -23,11 +23,15 @@ def retrain_networks(network_names):
         networks_repository.save_network(model, network_name)
 
 
-def train_all_networks(network_names):
+def delete_all_trained_networks():
+    networks_repository.delete_all_networks()
+
+
+def train_all_networks():
 
     train_x, train_y = cifar_dataset.get_cifar10_train_data()
 
-    for network_name in network_names:
+    for network_name in neural_networks.networks_names:
         if not networks_repository.network_exists(network_name):
             model = neural_networks.get_network_model(network_name)
 
