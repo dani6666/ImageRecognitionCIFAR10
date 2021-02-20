@@ -3,14 +3,17 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', dest='train', action='store_true', help='Train all untrained models without comparing')
-    parser.add_argument('-d', dest='delete', action='store_true', help='Delete all trained models')
+    parser.add_argument('-c', dest='compare_only', action='store_true', help='Compare only trained networks')
+    parser.add_argument('-t', dest='train', action='store_true', help='Train all untrained networks without comparing')
+    parser.add_argument('-d', dest='delete', action='store_true', help='Delete all trained networks')
     parser.add_argument('-r', dest='retrain_networks', nargs="+", default=[], help='Choose network names to retrain')
 
     parsed_args = parser.parse_args()
 
     used_args = 0
 
+    if parsed_args.compare_only:
+        used_args += 1
     if parsed_args.train:
         used_args += 1
     if parsed_args.delete:

@@ -44,7 +44,11 @@ def train_all_networks():
             networks_repository.save_network(model, network_name)
 
 
-def get_trained_network(network_name, train_x, train_y):
+def get_network_if_trained(network_name):
+    return networks_repository.get_network(network_name)
+
+
+def get_and_train_network(network_name, train_x, train_y):
 
     saved_network = networks_repository.get_network(network_name)
     if saved_network is not None:
