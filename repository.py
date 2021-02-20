@@ -3,9 +3,8 @@ import os
 from keras import models
 
 
-def __init__():
-    if not os.path.exists("NeuralNetworkModels"):
-        os.makedirs("NeuralNetworkModels")
+if not os.path.exists("NeuralNetworkModels"):
+    os.makedirs("NeuralNetworkModels")
 
 
 def get_network(name):
