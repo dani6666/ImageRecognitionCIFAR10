@@ -1,4 +1,5 @@
 import comparer
+import repository
 import trainer
 import neural_networks
 import argparse
@@ -7,7 +8,7 @@ import argparse
 def main(args):
 
     if args.delete:
-        trainer.delete_all_networks()
+        repository.delete_all_networks()
     elif any(args.retrain_networks):
         trainer.retrain_networks(args.retrain_networks)
     elif args.train:
