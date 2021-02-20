@@ -12,6 +12,8 @@ def main():
         trainer.retrain_networks(args.retrain_networks)
     elif args.train:
         trainer.train_all_networks()
+    elif args.compare_only:
+        comparer.compare_trained_neural_networks()
     else:
         comparer.compare_all_neural_networks()
 
