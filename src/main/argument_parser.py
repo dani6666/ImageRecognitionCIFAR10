@@ -21,3 +21,5 @@ def parse_args():
     if used_args > 1:
         print("You can use only one of additional args at one run")
         exit(1)
+
+    return parsed_args

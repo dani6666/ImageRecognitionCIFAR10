@@ -3,7 +3,7 @@ import os
 from keras import models
 
 
-networks_path = os.path.join("storage", "networks")
+networks_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.join("storage", "networks"))
 
 if not os.path.exists(networks_path):
     os.makedirs(networks_path)
